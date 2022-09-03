@@ -130,3 +130,78 @@ void bubbleSort_bidirectional(int arr[], int size) {
     right--;
   }
 }
+
+int calCeros(int mat[DIM][DIM]) {
+  // Calculo del numero máximo de entradas cero de una matriz...
+  int sum = 0;
+  for (int i = 0; i < DIM; i++) {
+    for (int j = 0; j < DIM; j++) {
+      if (mat[i][j] == 0) {
+        sum++;
+      }
+    }
+  }
+  return sum;
+}
+
+// llenado secuencial de la matriz ...
+void fillSeq(int mat[DIM][DIM]) {
+  int cont = 0;
+  for (int i = 0; i < DIM; i++) {
+    for (int j = 0; j < DIM; j++) {
+      mat[i][j] = cont;
+      cont++;
+    }
+  }
+}
+
+// Obtener la matriz transpuesta de una matriz ...
+void make_transpose(int mat[DIM][DIM], int transpose[DIM][DIM]) {
+  // Nota, recordar que si las dimensiones son diferentes, transpose debe ser
+  // [colums][rows]
+  for (int i = 0; i < DIM; i++) {
+    for (int j = 0; j < DIM; j++) {
+      transpose[i][j] = mat[j][i];
+    }
+  }
+}
+
+// Calcular la traza de una matriz...
+int cal_trace(int mat[DIM][DIM]) {
+  // La traza de una matriz es la suma de su diagonal principal...
+  int sum = 0;
+
+  for (int i = 0; i < DIM; i++) {
+    for (int j = 0; j < DIM; j++) {
+      if (i == j) {
+        sum += mat[i][j];
+      }
+    }
+  }
+  return sum;
+}
+
+// Saber si una matriz es simetrica...
+bool get_simetric(int mat[DIM][DIM]) {
+  // Una matriz es simetrica, si es que es igual a su transpuesta
+  int transpose[DIM][DIM];
+
+  make_transpose(mat, transpose);
+
+  for (int i = 0; i < DIM; i++) {
+    for (int j = 0; j < DIM; j++) {
+      if (mat[i][j] != transpose[i][j]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+string sliceRight(string hilera) {
+  string copy = hilera;
+  for (int i = 0; i < hilera.size(); i++) {
+    swap(copy[0], copy[i]);
+  }
+  return copy;
+}
