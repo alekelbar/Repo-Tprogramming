@@ -223,3 +223,9 @@ void getCalendar(int mat[CDIM][CDIM]) {
     cout << endl;
   }
 }
+
+// Funcion para saber si un año es bisiesto...
+bool isALeapYear(int year) {
+  /*https://docs.microsoft.com/es-es/office/troubleshoot/excel/determine-a-leap-year*/
+  return (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+}
