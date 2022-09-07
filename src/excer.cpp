@@ -205,3 +205,21 @@ string sliceRight(string hilera) {
   }
   return copy;
 }
+
+// Calendar App
+void getCalendar(int mat[CDIM][CDIM]) {
+
+  int cont = 0; // Cuenta cada día...
+  cout << "DOM LUN MAR MIE JUE VIE SAB" << endl;
+  for (int i = 0; i < CDIM; i++) {
+    for (int j = 0; j < CDIM; j++) {
+      cont++; // Pasamos al siguiente día..
+      if (cont <= 31) {
+        /*Mientras no se haya pasado de los 31 días...*/
+        mat[i][j] = cont;
+        cout << mat[i][j] << (cont > 9 ? "  " : "   ");
+      }
+    }
+    cout << endl;
+  }
+}
