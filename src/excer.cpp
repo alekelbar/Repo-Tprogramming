@@ -207,7 +207,7 @@ string sliceRight(string hilera) {
 }
 
 // Calendar App
-void getCalendar(int mat[CDIM][CDIM]) {
+void getCalendar(int mat[CDIM][CDIM], int month) {
 
   int cont = 0; // Cuenta cada día...
   cout << "DOM LUN MAR MIE JUE VIE SAB" << endl;
@@ -222,6 +222,36 @@ void getCalendar(int mat[CDIM][CDIM]) {
     }
     cout << endl;
   }
+}
+
+// funcion para saber cuantos días tiene un mes...
+int getDays(int month, int year) {
+  int thirtyOne[] = {1, 3, 4, 6, 7, 9, 12};
+  int thirty[] = {4, 5, 8, 11};
+
+  if (itsOn(thirty, 4, month)) {
+    return 30;
+  }
+
+  if (itsOn(thirtyOne, 7, month)) {
+    return 31;
+  }
+
+  if (isALeapYear(year)) {
+    return 28;
+  }
+
+  return 29; // UN añó no bisiesto, y es febrero...
+}
+
+// funcion auxiliar para get days, me dice si un elemento se encuentra en un
+// vector.
+bool itsOn(int vect[], int size, int target) {
+  for (int i = 0; i < size; i++) {
+    if (vect[i] == target)
+      return true;
+  }
+  return false;
 }
 
 // Funcion para saber si un año es bisiesto...
