@@ -209,19 +209,21 @@ string sliceRight(string hilera) {
 // Calendar App
 void getCalendar(int mat[CDIM][CDIM], int month, int year) {
 
-  int cont = 0; // Cuenta cada día...
+  int cont = 1; // Cuenta cada día...
   int days = getDays(
       month, year); // Obtener cuantos días tienes el mes de acuerdo al año...
-  int startAt = 0;  // La cantidad de días que salta al inicio...
+  int startAt =
+      zeller(month, year); // La cantidad de días que salta al inicio...
 
   cout << "DOM LUN MAR MIE JUE VIE SAB" << endl;
   for (int i = 0; i < CDIM; i++) {
     for (int j = 0; j < CDIM; j++) {
       if (cont <= days && !startAt) {
-        cont++; // Pasamos al siguiente día..
         mat[i][j] = cont;
         cout << mat[i][j] << (cont > 9 ? "  " : "   ");
+        cont++; // Pasamos al siguiente día..
       }
+
       if (startAt > 0) {
         cout << "    "; // los 3 caracteres del día + espacio...
         startAt--;
@@ -229,12 +231,25 @@ void getCalendar(int mat[CDIM][CDIM], int month, int year) {
     }
     cout << endl;
   }
+  cout << "Contador quedo en: " << cont << " Days: " << days;
+}
+
+int zeller(int month, int year) {
+  /*Formula de Zeller...*/
+  /*https://hmong.es/wiki/Zeller's_congruence*/
+
+  int a = (14 - month) / 12;
+  int y = year - a;
+  int m = month + 12 * a - 2;
+
+  int day = 1, d;
+  return (day + y + y / 4 - y / 100 + y / 400 + (31 * m) / 12) % 7;
 }
 
 // funcion para saber cuantos días tiene un mes...
 int getDays(int month, int year) {
-  int thirtyOne[] = {1, 3, 4, 6, 7, 9, 12};
-  int thirty[] = {4, 5, 8, 11};
+  int thirtyOne[] = {1, 3, 5, 7, 8, 10, 12};
+  int thirty[] = {4, 6, 9, 11};
 
   if (itsOn(thirty, 4, month)) {
     return 30;
