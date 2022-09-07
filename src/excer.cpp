@@ -207,20 +207,21 @@ string sliceRight(string hilera) {
 }
 
 // Calendar App
-void getCalendar(int mat[CDIM][CDIM], int month, int year) {
-
+void getCalendar(int month, int year) {
+  int calendar[CDIM][CDIM] = {{0}, {0}, {0}, {0}, {0}};
   int cont = 1; // Cuenta cada día...
   int days = getDays(
       month, year); // Obtener cuantos días tienes el mes de acuerdo al año...
   int startAt =
       zeller(month, year); // La cantidad de días que salta al inicio...
 
-  cout << "DOM LUN MAR MIE JUE VIE SAB" << endl;
+  cout << endl << months[month - 1] << endl;
+  cout << "SUN MON TUE WED THU FRI SAT" << endl;
   for (int i = 0; i < CDIM; i++) {
     for (int j = 0; j < CDIM; j++) {
       if (cont <= days && !startAt) {
-        mat[i][j] = cont;
-        cout << mat[i][j] << (cont > 9 ? "  " : "   ");
+        calendar[i][j] = cont;
+        cout << calendar[i][j] << (cont > 9 ? "  " : "   ");
         cont++; // Pasamos al siguiente día..
       }
 
@@ -231,7 +232,12 @@ void getCalendar(int mat[CDIM][CDIM], int month, int year) {
     }
     cout << endl;
   }
-  cout << "Contador quedo en: " << cont << " Days: " << days;
+}
+
+void getFullCalendar(const int year) {
+  for (int i = 1; i <= 12; i++) {
+    getCalendar(i, year);
+  }
 }
 
 int zeller(int month, int year) {
