@@ -207,17 +207,24 @@ string sliceRight(string hilera) {
 }
 
 // Calendar App
-void getCalendar(int mat[CDIM][CDIM], int month) {
+void getCalendar(int mat[CDIM][CDIM], int month, int year) {
 
   int cont = 0; // Cuenta cada día...
+  int days = getDays(
+      month, year); // Obtener cuantos días tienes el mes de acuerdo al año...
+  int startAt = 0;  // La cantidad de días que salta al inicio...
+
   cout << "DOM LUN MAR MIE JUE VIE SAB" << endl;
   for (int i = 0; i < CDIM; i++) {
     for (int j = 0; j < CDIM; j++) {
-      cont++; // Pasamos al siguiente día..
-      if (cont <= 31) {
-        /*Mientras no se haya pasado de los 31 días...*/
+      if (cont <= days && !startAt) {
+        cont++; // Pasamos al siguiente día..
         mat[i][j] = cont;
         cout << mat[i][j] << (cont > 9 ? "  " : "   ");
+      }
+      if (startAt > 0) {
+        cout << "    "; // los 3 caracteres del día + espacio...
+        startAt--;
       }
     }
     cout << endl;
