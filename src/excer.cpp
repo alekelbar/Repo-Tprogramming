@@ -266,10 +266,10 @@ int getDays(int month, int year) {
   }
 
   if (isALeapYear(year)) {
-    return 28;
+    return 29;
   }
 
-  return 29; // UN añó no bisiesto, y es febrero...
+  return 28; // UN añó no bisiesto, y es febrero...
 }
 
 // funcion auxiliar para get days, me dice si un elemento se encuentra en un
